@@ -3,6 +3,7 @@ using System;
 using FEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FundamentosEntityFramework.Migrations
 {
     [DbContext(typeof(TasksContext))]
-    partial class TasksContextModelSnapshot : ModelSnapshot
+    [Migration("20220721135739_ColumnPesoCategory")]
+    partial class ColumnPesoCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +31,7 @@ namespace FundamentosEntityFramework.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -42,20 +45,6 @@ namespace FundamentosEntityFramework.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categoria", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = new Guid("e62a447f-de7d-4070-b4e9-435e2b0ce623"),
-                            Name = "Actividades Pendientes",
-                            Peso = 20
-                        },
-                        new
-                        {
-                            CategoryId = new Guid("e62a447f-de7d-4070-b4e9-435e2b0ce6af"),
-                            Name = "Actividades Personales",
-                            Peso = 50
-                        });
                 });
 
             modelBuilder.Entity("FEF.Task", b =>
@@ -71,6 +60,7 @@ namespace FundamentosEntityFramework.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("PriorityTask")
@@ -86,24 +76,6 @@ namespace FundamentosEntityFramework.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Tarea", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            TaskId = new Guid("e62a447f-de7d-4070-b4e9-435e2b0ce610"),
-                            CategoryId = new Guid("e62a447f-de7d-4070-b4e9-435e2b0ce623"),
-                            Creation = new DateTime(2022, 7, 25, 14, 18, 10, 81, DateTimeKind.Local).AddTicks(8523),
-                            PriorityTask = 1,
-                            Title = "Pago de servicios publicos"
-                        },
-                        new
-                        {
-                            TaskId = new Guid("e62a447f-de7d-4070-b4e9-435e2b0ce611"),
-                            CategoryId = new Guid("e62a447f-de7d-4070-b4e9-435e2b0ce6af"),
-                            Creation = new DateTime(2022, 7, 25, 14, 18, 10, 81, DateTimeKind.Local).AddTicks(8550),
-                            PriorityTask = 0,
-                            Title = "Terminar de ver Pelicula en Netflix"
-                        });
                 });
 
             modelBuilder.Entity("FEF.Task", b =>
